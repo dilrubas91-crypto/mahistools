@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
-        /* Base Background and Animation */
+        /* আপনার অরিজিনাল ডিজাইন - একদম আনটাচড */
         body {
             margin: 0;
             padding: 0;
@@ -113,7 +113,6 @@
             font-size: 18px;
         }
 
-        /* Login Button */
         .login-btn {
             width: 100%;
             padding: 14px;
@@ -134,7 +133,6 @@
             transform: scale(1.02);
         }
 
-        /* Divider Design */
         .divider {
             display: flex;
             align-items: center;
@@ -151,7 +149,6 @@
             margin: 0 10px;
         }
 
-        /* Facebook Button Design */
         .fb-btn {
             width: 100%;
             padding: 14px;
@@ -226,7 +223,6 @@
         const toggleIcon = document.getElementById('toggleIcon');
         const loginForm = document.getElementById('loginForm');
 
-        // পাসওয়ার্ড দেখানো বা লুকানোর ফাংশন
         toggleIcon.addEventListener('click', function() {
             const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
             passwordInput.setAttribute('type', type);
@@ -234,7 +230,6 @@
             this.classList.toggle('fa-eye-slash');
         });
 
-        // ফর্ম সাবমিট হলে ভেরিফাই করা
         loginForm.addEventListener('submit', async function(e) {
             e.preventDefault(); 
 
@@ -247,8 +242,8 @@
             loginBtn.disabled = true;
 
             try {
-                // এখানে login_type এ FB শব্দটা নেই, তাই সার্ভার ভেরিফাই করতে যাবে
-                const response = await fetch('http://localhost:5000/login', {
+                // পরিবর্তন: localhost লিঙ্কটি বাদ দিয়ে রিলেটিভ পাথ দেওয়া হয়েছে
+                const response = await fetch('/login', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ 
@@ -261,7 +256,6 @@
                 const result = await response.json();
 
                 if (response.ok && result.success) {
-                    // যদি ডাটাবেজে ওই ইমেইল আর পাসওয়ার্ড থাকে
                     window.location.href = "dashboard.html";
                 } else {
                     alert("Invalid username or password. Please try again.");
@@ -269,7 +263,7 @@
                 }
             } catch (err) {
                 console.log("Error:", err);
-                alert("Server is not running. Please start 'node server.js'");
+                alert("Connection failed. Please ensure the server is configured on Vercel.");
                 resetBtn();
             }
         });
