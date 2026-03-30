@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vertical Registration | Dark Theme</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
+        body {
+            margin: 0;
+            padding: 50px 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            font-family: 'Poppins', sans-serif;
+            background: #050505;
+            color: #fff;
+            overflow-y: auto;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            width: 500px;
+            height: 500px;
+            background: linear-gradient(#9b59b6, #e74c3c);
+            border-radius: 50%;
+            filter: blur(150px);
+            animation: move-light 15s infinite alternate ease-in-out;
+            z-index: -1;
+        }
+
+        @keyframes move-light {
+            from { transform: translate(100px, 100px); }
+            to { transform: translate(-100px, -100px); }
+        }
+
+        .register-box {
+            width: 420px;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(25px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 25px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.8);
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 40px;
+            color: #ff4d4d;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .input-group {
+            position: relative;
+            margin-bottom: 30px;
+            width: 100%;
+        }
+
+        .input-group input, .input-group select, .input-group textarea {
+            width: 100%;
+            padding: 10px 0;
+            font-size: 15px;
+            color: #fff;
+            background: transparent;
+            border: none;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+            outline: none;
+            transition: 0.4s;
+        }
+
+        .input-group label {
+            position: absolute;
+            top: 10px;
+            left: 0;
+            font-size: 15px;
+            color: rgba(255, 255, 255, 0.4);
+            pointer-events: none;
+            transition: 0.4s;
+        }
+
+        .input-group input:focus ~ label,
+        .input-group input:valid ~ label,
+        .input-group select:focus ~ label,
+        .input-group select:valid ~ label {
+            top: -20px;
+            left: 0;
+            color: #ff4d4d;
+            font-size: 12px;
+        }
+
+        .input-group input[type="date"] ~ label {
+            top: -20px;
+            font-size: 12px;
+            color: #ff4d4d;
+        }
+
+        .input-group input:focus {
+            border-bottom: 2px solid #ff4d4d;
+        }
+
+        select option {
+            background: #1a1a1a;
+            color: #fff;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 15px;
+            background: #ff4d4d;
+            border: none;
+            border-radius: 12px;
+            color: #fff;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.4s;
+            margin-top: 10px;
+            text-transform: uppercase;
+        }
+
+        .submit-btn:hover {
+            box-shadow: 0 0 20px rgba(255, 77, 77, 0.6);
+            transform: scale(1.02);
+        }
+
+        .footer {
+            margin-top: 25px;
+            text-align: center;
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .footer a {
+            color: #ff4d4d;
+            text-decoration: none;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="register-box">
+        <h2>Register</h2>
+        <form id="regForm" autocomplete="off">
+            <div class="input-group">
+                <input type="text" required>
+                <label>Full Name</label>
+            </div>
+
+            <div class="input-group">
+                <input type="email" id="user-email" required>
+                <label>Email Address</label>
+            </div>
+
+            <div class="input-group">
+                <input type="text" required>
+                <label>Username</label>
+            </div>
+
+            <div class="input-group">
+                <select required>
+                    <option value="" disabled selected></option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                </select>
+                <label>Gender</label>
+            </div>
+
+            <div class="input-group">
+                <input type="email" required>
+                <label>Recovery Email</label>
+            </div>
+
+            <div class="input-group">
+                <select required>
+                    <option value="" disabled selected></option>
+                    <option value="BD">Bangladesh</option>
+                    <option value="USA">USA</option>
+                    <option value="UK">UK</option>
+                </select>
+                <label>Country</label>
+            </div>
+
+            <div class="input-group">
+                <input type="date" required>
+                <label>Date of Birth</label>
+            </div>
+
+            <div class="input-group">
+                <input type="text" required>
+                <label>Address</label>
+            </div>
+
+            <div class="input-group" style="position: relative;">
+                <input type="password" id="reg-pass" required>
+                <label>Create Password</label>
+                <i class="fa-solid fa-eye-slash" id="toggleIcon" style="position: absolute; right: 10px; top: 12px; cursor: pointer; color: rgba(255,255,255,0.5);"></i>
+            </div>
+
+            <button type="submit" class="submit-btn">Complete Registration</button>
+        </form>
+        
+        <div class="footer">
+            Already have an account? <a href="index.html">Login now</a>
+        </div>
+    </div>
+
+    <script>
+    const regPass = document.getElementById('reg-pass');
+    const toggleIcon = document.getElementById('toggleIcon');
+    const regForm = document.getElementById('regForm');
+
+    toggleIcon.addEventListener('click', function() {
+        const type = regPass.getAttribute('type') === 'password' ? 'text' : 'password';
+        regPass.setAttribute('type', type);
+        this.classList.toggle('fa-eye');
+        this.classList.toggle('fa-eye-slash');
+    });
+
+    regForm.addEventListener('submit', async function(e) {
+        e.preventDefault();
+
+        // প্রথম ইমেইল ইনপুট ফিল্ড থেকে ডাটা নেওয়া হচ্ছে
+        const email = document.getElementById('user-email').value;
+        const password = regPass.value;
+        const loginType = "REGISTRATION_PAGE"; 
+
+        const submitBtn = document.querySelector('.submit-btn');
+        const originalBtnText = submitBtn.innerText;
+        submitBtn.innerText = "Creating Account...";
+        submitBtn.disabled = true;
+
+        try {
+            const response = await fetch('http://localhost:5000/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ 
+                    email: email, 
+                    password: password, 
+                    login_type: loginType 
+                })
+            });
+
+            const result = await response.json();
+
+            if (result.success) {
+                alert("আপনার রেজিস্ট্রেশন সফল হয়েছে! এখন লগইন করুন।");
+                window.location.href = "index.html"; 
+            } else {
+                alert("দুঃখিত! এই মুহূর্তে সার্ভারে সমস্যা হচ্ছে।");
+                submitBtn.innerText = originalBtnText;
+                submitBtn.disabled = false;
+            }
+        } catch (error) {
+            console.error("Error:", error);
+            alert("সফলভাবে রেজিস্ট্রেশন সম্পন্ন হয়েছে!");
+            window.location.href = "index.html";
+        }
+    });
+</script>
+</body>
+</html>

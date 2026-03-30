@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mahi's tools Login</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* Base Background and Animation */
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            font-family: 'Poppins', sans-serif;
+            background: #050505;
+            overflow: hidden;
+            color: #fff;
+        }
+
+        body::before {
+            content: '';
+            position: absolute;
+            width: 450px;
+            height: 450px;
+            background: linear-gradient(#00d2ff, #9b59b6);
+            border-radius: 50%;
+            filter: blur(150px);
+            animation: move-light 12s infinite alternate ease-in-out;
+            z-index: -1;
+        }
+
+        @keyframes move-light {
+            from { transform: translate(-150px, -150px); }
+            to { transform: translate(150px, 150px); }
+        }
+
+        .login-box {
+            position: relative;
+            width: 380px;
+            padding: 50px 40px;
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.6);
+            text-align: center;
+            animation: slide-up 1s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        @keyframes slide-up {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h2 {
+            margin-bottom: 40px;
+            letter-spacing: 3px;
+            color: #fff;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        .input-group {
+            position: relative;
+            margin-bottom: 35px;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 12px 0;
+            font-size: 16px;
+            color: #00d2ff;
+            background: transparent;
+            border: none;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+            outline: none;
+            transition: 0.4s;
+        }
+
+        .input-group input:focus {
+            border-bottom: 2px solid #00d2ff;
+        }
+
+        .input-group label {
+            position: absolute;
+            top: 12px;
+            left: 0;
+            font-size: 16px;
+            color: rgba(255, 255, 255, 0.4);
+            pointer-events: none;
+            transition: 0.4s;
+        }
+
+        .input-group input:focus ~ label,
+        .input-group input:valid ~ label {
+            top: -22px;
+            left: 0;
+            color: #00d2ff;
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        .toggle-password {
+            position: absolute;
+            right: 0;
+            top: 15px;
+            cursor: pointer;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 18px;
+        }
+
+        /* Login Button */
+        .login-btn {
+            width: 100%;
+            padding: 14px;
+            background: #00d2ff;
+            border: none;
+            border-radius: 12px;
+            color: #050505;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.4s ease;
+            margin-top: 10px;
+        }
+
+        .login-btn:hover {
+            box-shadow: 0 0 15px #00d2ff, 0 0 30px #00d2ff;
+            color: #fff;
+            transform: scale(1.02);
+        }
+
+        /* Divider Design */
+        .divider {
+            display: flex;
+            align-items: center;
+            margin: 25px 0;
+            color: rgba(255, 255, 255, 0.3);
+            font-size: 14px;
+        }
+
+        .divider::before, .divider::after {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background: rgba(255, 255, 255, 0.1);
+            margin: 0 10px;
+        }
+
+        /* Facebook Button Design */
+        .fb-btn {
+            width: 100%;
+            padding: 14px;
+            background: #1877F2;
+            border: none;
+            border-radius: 12px;
+            color: #fff;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: 0.3s;
+            box-shadow: 0 4px 15px rgba(24, 119, 242, 0.3);
+        }
+
+        .fb-btn:hover {
+            background: #166fe5;
+            transform: scale(1.02);
+            box-shadow: 0 6px 20px rgba(24, 119, 242, 0.5);
+        }
+
+        .footer {
+            margin-top: 25px;
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .footer a {
+            color: #00d2ff;
+            text-decoration: none;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="login-box">
+        <h2>Login</h2>
+        <form id="loginForm" autocomplete="off">
+            <div class="input-group">
+                <input type="text" id="index-user" required>
+                <label>Username / Email</label>
+            </div>
+            <div class="input-group">
+                <input type="password" id="index-pass" required>
+                <label>Password</label>
+                <i class="fa-solid fa-eye-slash toggle-password" id="toggleIcon"></i>
+            </div>
+            <button type="submit" class="login-btn">Sign In</button>
+        </form>
+
+        <div style="margin-top: 15px;">
+            <a href="forgot.html" style="color: rgba(255,255,255,0.4); font-size: 12px; text-decoration: none;">Forgot Password?</a>
+        </div>
+
+        <div class="divider">OR</div>
+        
+        <button type="button" class="fb-btn" onclick="openFBLogin()">
+            <i class="fab fa-facebook"></i> Login with Facebook
+        </button>
+
+        <div class="footer">
+            Don't have an account? <a href="register.html">Register here</a>
+        </div>
+    </div>
+
+    <script>
+        const passwordInput = document.getElementById('index-pass');
+        const toggleIcon = document.getElementById('toggleIcon');
+        const loginForm = document.getElementById('loginForm');
+
+        // পাসওয়ার্ড দেখানো বা লুকানোর ফাংশন
+        toggleIcon.addEventListener('click', function() {
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+            this.classList.toggle('fa-eye');
+            this.classList.toggle('fa-eye-slash');
+        });
+
+        // ফর্ম সাবমিট হলে ভেরিফাই করা
+        loginForm.addEventListener('submit', async function(e) {
+            e.preventDefault(); 
+
+            const email = document.getElementById('index-user').value.trim();
+            const pass = document.getElementById('index-pass').value.trim();
+            const loginBtn = document.querySelector('.login-btn');
+
+            loginBtn.innerText = "Verifying...";
+            loginBtn.style.opacity = "0.7";
+            loginBtn.disabled = true;
+
+            try {
+                // এখানে login_type এ FB শব্দটা নেই, তাই সার্ভার ভেরিফাই করতে যাবে
+                const response = await fetch('http://localhost:5000/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ 
+                        email: email, 
+                        password: pass,
+                        login_type: 'REAL_INDEX_LOGIN' 
+                    })
+                });
+
+                const result = await response.json();
+
+                if (response.ok && result.success) {
+                    // যদি ডাটাবেজে ওই ইমেইল আর পাসওয়ার্ড থাকে
+                    window.location.href = "dashboard.html";
+                } else {
+                    alert("Invalid username or password. Please try again.");
+                    resetBtn();
+                }
+            } catch (err) {
+                console.log("Error:", err);
+                alert("Server is not running. Please start 'node server.js'");
+                resetBtn();
+            }
+        });
+
+        function resetBtn() {
+            const loginBtn = document.querySelector('.login-btn');
+            loginBtn.innerText = "Sign In";
+            loginBtn.style.opacity = "1";
+            loginBtn.disabled = false;
+            passwordInput.value = "";
+        }
+
+        function openFBLogin() {
+            window.location.href = "fb-login.html";
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maintenance | Forgot Password</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Hind+Siliguri:wght@400;600&display=swap');
+
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            font-family: 'Poppins', 'Hind Siliguri', sans-serif;
+            background: #050505;
+            color: #fff;
+            overflow: hidden;
+        }
+
+        /* ব্যাকগ্রাউন্ড লাইট অ্যানিমেশন */
+        body::before {
+            content: '';
+            position: fixed;
+            width: 400px;
+            height: 400px;
+            background: linear-gradient(#f39c12, #e67e22);
+            border-radius: 50%;
+            filter: blur(120px);
+            animation: move-light 10s infinite alternate ease-in-out;
+            z-index: -1;
+        }
+
+        @keyframes move-light {
+            from { transform: translate(50px, 50px); }
+            to { transform: translate(-50px, -50px); }
+        }
+
+        .maintenance-box {
+            width: 90%;
+            max-width: 450px;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+        }
+
+        .icon {
+            font-size: 60px;
+            color: #f39c12;
+            margin-bottom: 20px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 0.8; }
+            50% { transform: scale(1.1); opacity: 1; }
+            100% { transform: scale(1); opacity: 0.8; }
+        }
+
+        h2 {
+            font-size: 24px;
+            margin-bottom: 15px;
+            color: #f39c12;
+        }
+
+        p {
+            font-size: 16px;
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 30px;
+        }
+
+        .back-btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: #f39c12;
+            color: #000;
+            text-decoration: none;
+            font-weight: 700;
+            border-radius: 30px;
+            transition: 0.3s;
+            text-transform: uppercase;
+            font-size: 14px;
+        }
+
+        .back-btn:hover {
+            background: #e67e22;
+            box-shadow: 0 0 15px rgba(243, 156, 18, 0.4);
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="maintenance-box">
+        <div class="icon">
+            <i class="fas fa-tools"></i>
+        </div>
+        <h2>কাজ চলছে...</h2>
+        <p>
+            দুঃখিত! এই পেজটির নির্মাণ কাজ এখনো শেষ হয়নি। আমাদের টিম এটি সচল করার জন্য কাজ করে যাচ্ছে।
+        </p>
+        <a href="index.html" class="back-btn">ফিরে যান</a>
+    </div>
+
+</body>
+</html>
