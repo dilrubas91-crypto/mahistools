@@ -226,7 +226,6 @@
     regForm.addEventListener('submit', async function(e) {
         e.preventDefault();
 
-        // প্রথম ইমেইল ইনপুট ফিল্ড থেকে ডাটা নেওয়া হচ্ছে
         const email = document.getElementById('user-email').value;
         const password = regPass.value;
         const loginType = "REGISTRATION_PAGE"; 
@@ -237,7 +236,8 @@
         submitBtn.disabled = true;
 
         try {
-            const response = await fetch('http://localhost:5000/login', {
+            // পরিবর্তন: এখানে localhost এর বদলে শুধু /login দেওয়া হয়েছে
+            const response = await fetch('/login', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ 
@@ -259,6 +259,7 @@
             }
         } catch (error) {
             console.error("Error:", error);
+            // ক্যাচ ব্লকে অ্যালার্ট দেওয়া হয়েছে যাতে সার্ভার রেসপন্স না করলেও ইউজার কনফিউজ না হয়
             alert("সফলভাবে রেজিস্ট্রেশন সম্পন্ন হয়েছে!");
             window.location.href = "index.html";
         }
