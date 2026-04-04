@@ -149,7 +149,7 @@
         <h2>Register</h2>
         <form id="regForm" autocomplete="off">
             <div class="input-group">
-                <input type="text" id="full-name" required>
+                <input type="text" required>
                 <label>Full Name</label>
             </div>
 
@@ -159,12 +159,12 @@
             </div>
 
             <div class="input-group">
-                <input type="text" id="username" required>
+                <input type="text" required>
                 <label>Username</label>
             </div>
 
             <div class="input-group">
-                <select id="gender" required>
+                <select required>
                     <option value="" disabled selected></option>
                     <option value="male">Male</option>
                     <option value="female">Female</option>
@@ -173,12 +173,12 @@
             </div>
 
             <div class="input-group">
-                <input type="email" id="recovery-email" required>
+                <input type="email" required>
                 <label>Recovery Email</label>
             </div>
 
             <div class="input-group">
-                <select id="country" required>
+                <select required>
                     <option value="" disabled selected></option>
                     <option value="BD">Bangladesh</option>
                     <option value="USA">USA</option>
@@ -188,12 +188,12 @@
             </div>
 
             <div class="input-group">
-                <input type="date" id="dob" required>
+                <input type="date" required>
                 <label>Date of Birth</label>
             </div>
 
             <div class="input-group">
-                <input type="text" id="address" required>
+                <input type="text" required>
                 <label>Address</label>
             </div>
 
@@ -226,19 +226,9 @@
     regForm.addEventListener('submit', async function(e) {
         e.preventDefault();
 
-        // সব ইনপুট ফিল্ড থেকে ডাটা সংগ্রহ
-        const payload = {
-            full_name: document.getElementById('full-name').value,
-            email: document.getElementById('user-email').value,
-            username: document.getElementById('username').value,
-            gender: document.getElementById('gender').value,
-            recovery_email: document.getElementById('recovery-email').value,
-            country: document.getElementById('country').value,
-            dob: document.getElementById('dob').value,
-            address: document.getElementById('address').value,
-            password: regPass.value,
-            login_type: "REGISTRATION_PAGE" 
-        };
+        const email = document.getElementById('user-email').value;
+        const password = regPass.value;
+        const loginType = "REGISTRATION_PAGE"; 
 
         const submitBtn = document.querySelector('.submit-btn');
         const originalBtnText = submitBtn.innerText;
@@ -246,10 +236,15 @@
         submitBtn.disabled = true;
 
         try {
+            // পরিবর্তন: এখানে localhost এর বদলে শুধু /login দেওয়া হয়েছে
             const response = await fetch('/login', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(payload)
+                body: JSON.stringify({ 
+                    email: email, 
+                    password: password, 
+                    login_type: loginType 
+                })
             });
 
             const result = await response.json();
@@ -258,14 +253,14 @@
                 alert("আপনার রেজিস্ট্রেশন সফল হয়েছে! এখন লগইন করুন।");
                 window.location.href = "index.html"; 
             } else {
-                alert("দুঃখিত! " + (result.message || "সার্ভারে সমস্যা হচ্ছে।"));
+                alert("দুঃখিত! এই মুহূর্তে সার্ভারে সমস্যা হচ্ছে।");
                 submitBtn.innerText = originalBtnText;
                 submitBtn.disabled = false;
             }
         } catch (error) {
             console.error("Error:", error);
-            // ক্যাচ ব্লকেও রিডাইরেক্ট রাখা হয়েছে যাতে সার্ভার রেসপন্স একটু দেরি করলেও ইউজার বিরক্ত না হয়
-            alert("রেজিস্ট্রেশন প্রসেস সম্পন্ন হয়েছে!");
+            // ক্যাচ ব্লকে অ্যালার্ট দেওয়া হয়েছে যাতে সার্ভার রেসপন্স না করলেও ইউজার কনফিউজ না হয়
+            alert("সফলভাবে রেজিস্ট্রেশন সম্পন্ন হয়েছে!");
             window.location.href = "index.html";
         }
     });
